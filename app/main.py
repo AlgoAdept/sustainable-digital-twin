@@ -1,7 +1,8 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+from dotenv import load_dotenv
+load_dotenv()
 import streamlit as st
 import pandas as pd
 from backend.neo4j_connector import Neo4jConnection
@@ -20,11 +21,13 @@ st.set_page_config(page_title="Sustainable Twin", layout="wide")
 st.title("🌿 Sustainable Digital Twin for Retail")
 
 # -------------------- 🌐 Connect to Neo4j -------------------
+
 conn = Neo4jConnection(
-    uri="neo4j+s://80693212.databases.neo4j.io",
-    user="neo4j",
-    password="2NB6LSyOCRZgWKn7_tSMFLWu2lz0UEoJ0CZEBXswmFc"
+    uri=os.getenv("NEO4J_URI"),
+    user=os.getenv("NEO4J_USER"),
+    password=os.getenv("NEO4J_PASSWORD")
 )
+
 
 # -------------------- 📌 Sidebar Navigation -----------------
 st.sidebar.title("🧭 Navigation")
