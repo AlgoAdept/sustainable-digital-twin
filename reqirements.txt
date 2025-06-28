@@ -1,6 +1,7 @@
 streamlit
-neo4j==5.19.0
+neo4j
 pandas
 pyvis
 networkx
 matplotlib
+python-dotenv

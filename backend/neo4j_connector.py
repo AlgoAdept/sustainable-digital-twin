@@ -1,8 +1,14 @@
+import os
 from neo4j import GraphDatabase
 
 class Neo4jConnection:
-    def __init__(self, uri, user, password):
-        self.driver = GraphDatabase.driver(uri, auth=(user, password))
+    def __init__(self):
+        self.uri = os.getenv("NEO4J_URI")
+        self.user = os.getenv("NEO4J_USER")
+        self.password = os.getenv("NEO4J_PASS")
+        if not all([self.uri, self.user, self.password]):
+            raise ValueError("NEO4J credentials not set in environment variables.")
+        self.driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
 
     def close(self):
         self.driver.close()
@@ -10,14 +16,3 @@ class Neo4jConnection:
     def query(self, query):
         with self.driver.session() as session:
             return session.run(query).data()
-
-db = Neo4jConnection(
-    uri="neo4j+s://80693212.databases.neo4j.io",  # Use your AuraDB URI
-    user="neo4j",
-    password="2NB6LSyOCRZgWKn7_tSMFLWu2lz0UEoJ0CZEBXswmFc"  # Replace with actual password you use to login to Aura
-)
-results = db.query("MATCH (n)-[r]->(m) RETURN n.name AS from, TYPE(r) AS rel, m.name AS to")
-print(results)
-db.close()
-
-
