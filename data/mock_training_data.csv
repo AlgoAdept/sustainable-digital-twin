@@ -1,0 +1,11 @@
+product,inventory,expiry_days,carbon_score,donation_likelihood
+Organic Rice,120,2,40,1
+Almond Milk,150,1,60,1
+Gluten-Free Bread,80,5,55,0
+Almond Milk,40,7,60,0
+Organic Rice,100,1,40,1
+Gluten-Free Bread,110,2,55,1
+Almond Milk,70,3,60,0
+Organic Rice,90,3,50,0
+Almond Milk,150,1,70,0
+Tofu Burger,65,6,40,1
